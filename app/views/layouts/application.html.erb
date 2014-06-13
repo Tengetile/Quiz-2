@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Idea Factory</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  
+  <body>
+
+    <nav class="navbar navbar-main" role="navigation">
+      <div class="container-fluid">
+        <%= link_to "Home", root_path %>
+          <div class="pull-right">
+            <%if  user_signed_in? %>
+              <%= "Hello #{current_user.name_display} "%>
+              <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
+            <%else%>
+              <%= link_to "Sign In", new_user_session_path %>
+            <%end%>
+          </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <% if flash[:notice] || flash[:error] %>
+        <h3><%= flash[:notice] || flash[:error] %></h3>
+      <% end %>
+    <%= yield %>
+    </div>
+   </body>
+
+
+
+</html>

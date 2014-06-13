@@ -1,0 +1,22 @@
+<h1> Idea Factory 
+<%= link_to "New Idea", new_idea_path, class: "btn btn-primary pull-right" %>
+</h1>
+<hr>
+
+<div class="container-fluid">
+  <% @idea.each do |idea| %>
+    <div class="well">
+      <h3><%=  link_to idea.title, idea %></h3>
+      <p> <%= idea.description %></p> 
+      <br>
+      <p><%="Created By: '#{idea.user.name_display}'"%></p>
+    
+     <% if @like%>
+        <%= link_to "Unlike",[idea, @like], class:"btn btn-danger", method: :delete %>
+      <%else%>
+        <%=link_to "Like",[idea, Like.new], class:"btn btn-primary", method: :post%>
+    <%end%>
+    </div>
+    <%end %>   
+  <hr>
+</div>

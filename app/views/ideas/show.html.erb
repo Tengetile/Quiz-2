@@ -1,0 +1,33 @@
+<div class="well">
+<h3><%= @idea.title %></h3>
+<p><%= @idea.description %> </p>
+</div>
+
+<%= link_to "Edit", edit_idea_path(@idea), class: "btn btn-info btn-sm" %>
+<%= link_to "Delete", @idea, method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger btn-sm" %>
+<br>
+<br>
+
+<h5> Add Comment </h5>
+
+<%= form_for [@idea, @comment] do |f|%>
+    <div class="form-group">
+      <%= f.text_area :body %>
+    </div>
+    <%= f.submit "Save Comment", class: "btn btn-info btn-sm"%>
+  <%end%>
+  <br>
+
+  <% @idea.comments.each do |comment| %>
+    <div class="well">
+      <%= comment.body%>
+      <br>
+    </div>
+
+    <%= link_to "Edit", edit_idea_comment_path(@idea, comment), class: "btn btn-info btn-sm"%>
+    <%= link_to "Delete", [@idea,comment], method: :delete, data:{confrim: "Are you sure?"}, class: "btn btn-danger btn-sm" %> 
+    <hr>
+    
+  <%end %>
+  
+
